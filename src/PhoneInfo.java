@@ -1,10 +1,9 @@
-
 public class PhoneInfo
 {
   private String       name;
   private String       phoneNumber;
   private String       birthday;
-
+  
   public PhoneInfo(String name, String phoneNumber){
     this.name = name;
     this.phoneNumber = phoneNumber;
@@ -14,6 +13,11 @@ public class PhoneInfo
   public PhoneInfo(String name, String phoneNumber, String birthday){
     this(name, phoneNumber);
     this.birthday = birthday;
+  }
+  
+  public String toString(){
+	  
+	  return name;
   }
 
   public void showPhoneInfo(){
