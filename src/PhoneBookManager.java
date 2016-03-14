@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class PhoneBookManager {
+	final private int MAX_CNT = 100;
 	
 	static Scanner scanner = new Scanner(System.in);
 	
@@ -8,7 +9,7 @@ public class PhoneBookManager {
 	private int nCurIdx;
 	
 	public PhoneBookManager(){
-		arPhoneInfo = new PhoneInfo[100];
+		arPhoneInfo = new PhoneInfo[MAX_CNT];
 		nCurIdx = 0;
 	}
 	
@@ -64,7 +65,7 @@ public class PhoneBookManager {
 		}while(nSelect != 5);
 	}
 	
-	public int findPhoneInfo(){
+	private int findPhoneInfo(){
 		String name;
 		
 		int nIdx = -1;
@@ -88,7 +89,7 @@ public class PhoneBookManager {
 		return nIdx;
 	}
 	
-	public boolean addPhoneInfo(){
+	private boolean addPhoneInfo(){
 		
 		if(nCurIdx >= 100)
 			return false;
@@ -101,7 +102,7 @@ public class PhoneBookManager {
 		return true;
 	}
 	
-	public boolean removePhoneInfo(){
+	private boolean removePhoneInfo(){
 		String name;
 		
 		if(nCurIdx <= 0)

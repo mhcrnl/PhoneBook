@@ -16,8 +16,15 @@ public class PhoneInfo
   }
   
   public String toString(){
+	  String info = "";
+	  info += name;
+	  info += ", ";
+	  info += phoneNumber;
+	  info += ", ";
+	  info += birthday;
+	  info += "\n";
 	  
-	  return name;
+	  return info;
   }
   
   public String getName(){

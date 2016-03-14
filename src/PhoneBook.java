@@ -6,5 +6,6 @@ public class PhoneBook {
 		PhoneBookManager manager = new PhoneBookManager();
 		
 		manager.showMenu();
+		
 	}
 }
