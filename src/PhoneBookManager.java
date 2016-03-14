@@ -75,7 +75,7 @@ public class PhoneBookManager {
 		
 		// find the name
 		for(int i=0; i<nCurIdx; i++){
-			if(name.compareTo(arPhoneInfo[i].toString()) == 0){
+			if(name.compareTo(arPhoneInfo[i].getName()) == 0){
 				nIdx = i;
 				break;
 			}
@@ -116,7 +116,7 @@ public class PhoneBookManager {
 		for(int i=0; i<nCurIdx; i++){
 			
 			// 2-1 . if found the name
-			if(arPhoneInfo[i].toString().compareTo(name) == 0)
+			if(arPhoneInfo[i].getName().compareTo(name) == 0)
 			{
 				// delete
 				for(int j=i; j<nCurIdx-1; j++){
@@ -148,7 +148,6 @@ public class PhoneBookManager {
 		
 		String name;
 		String phoneNumber;
-		String birthday;
 		
 		
 		System.out.print("Name: ");
@@ -157,10 +156,7 @@ public class PhoneBookManager {
 		System.out.print("phoneNumber: ");
 		phoneNumber = scanner.nextLine();
 		
-		System.out.print("birthday: ");
-		birthday = scanner.nextLine();
-		
-		return new PhoneInfo(name, phoneNumber, birthday);
+		return new PhoneInfo(name, phoneNumber);
 	}
 	
 }
