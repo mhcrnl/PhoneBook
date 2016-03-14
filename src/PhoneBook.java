@@ -3,7 +3,7 @@ public class PhoneBook {
 	
 	public static void main(String[] args) {
 		
-		PhoneBookManager manager = new PhoneBookManager();
+		PhoneBookManager manager = PhoneBookManager.getInstanace();
 		
 		manager.showMenu();
 		

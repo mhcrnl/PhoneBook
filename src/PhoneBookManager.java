@@ -1,16 +1,24 @@
 import java.util.Scanner;
 
 public class PhoneBookManager {
-	final private int MAX_CNT = 100;
+	private static Scanner scanner = new Scanner(System.in);
 	
-	static Scanner scanner = new Scanner(System.in);
+	private final int MAX_CNT = 100;
 	
+	private static PhoneBookManager manager;
 	private PhoneInfo[] arPhoneInfo;
 	private int nCurIdx;
 	
-	public PhoneBookManager(){
+	private PhoneBookManager(){
 		arPhoneInfo = new PhoneInfo[MAX_CNT];
 		nCurIdx = 0;
+	}
+	
+	public static PhoneBookManager getInstanace(){
+		if(manager == null)
+			manager = new PhoneBookManager();
+		
+		return manager;
 	}
 	
 	public void showMenu(){
@@ -32,31 +40,31 @@ public class PhoneBookManager {
 			switch(nSelect){
 			
 			//Add Phone Info
-			case 1:
+			case MENU_SELECT.INPUT:
 				addPhoneInfo();
 				break;
 				
 				
 			//Find Phone Info	
-			case 2: 
+			case MENU_SELECT.SEARCH: 
 				findPhoneInfo();
 				break;
 				
 				
 			//Remove Phone Info	
-			case 3: 
+			case MENU_SELECT.DELETE: 
 				removePhoneInfo();
 				break;
 				
 				
 			//Show All Phone Info	
-			case 4:	
+			case MENU_SELECT.SHOW:	
 				showAllPhoneInfo();
 				break;
 			
 			
 			// Halt the Program
-			case 5:	
+			case MENU_SELECT.HALT:	
 				break;
 				
 			default:
@@ -169,12 +177,11 @@ public class PhoneBookManager {
 		
 		switch(nInput_select){
 		
-		
-		case 1: // normal
+		case READ_SELECT.NORMAL: // normal
 			pInfo = new PhoneInfo(name, phoneNumber);
 			break;
 			
-		case 2: // Univ
+		case READ_SELECT.UNIV: // Univ
 			System.out.print("major: ");
 			major = scanner.nextLine();
 			
@@ -186,7 +193,7 @@ public class PhoneBookManager {
 			
 			break;
 			
-		case 3: // Company
+		case READ_SELECT.COMP: // Company
 			System.out.print("company: ");
 			company = scanner.nextLine();
 			
