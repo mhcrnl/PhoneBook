@@ -25,15 +25,16 @@ public class PhoneBookManager {
 		int nSelect = 0;
 
 		do{
-			System.out.println("선택하세요...");
-			System.out.println("1. 데이터 입력");
-			System.out.println("2. 데이터 검색");
-			System.out.println("3. 데이터 삭제");
-			System.out.println("4. 데이터 출력");
-			System.out.println("5. 프로그램 종료");
-			System.out.print("입력: ");
-
 			try{
+				System.out.println("선택하세요...");
+				System.out.println("1. 데이터 입력");
+				System.out.println("2. 데이터 검색");
+				System.out.println("3. 데이터 삭제");
+				System.out.println("4. 데이터 출력");
+				System.out.println("5. 프로그램 종료");
+				System.out.print("입력: ");
+
+
 				nSelect = scanner.nextInt();
 				scanner.nextLine(); // fflush
 
@@ -75,7 +76,7 @@ public class PhoneBookManager {
 				}
 			}
 			catch(MenuChoiceException e){
-				e.getMessage();
+				System.out.println(e.getMessage());
 				continue;
 			}
 
@@ -117,17 +118,17 @@ public class PhoneBookManager {
 		System.out.print("선택>>");
 		choose = scanner.nextInt();
 		scanner.nextLine(); //fflush
-		
-		
+
+
 		if((choose < 0) || (choose > 3))
 			throw new MenuChoiceException();
-		
-		
-		
+
+
+
 		arPhoneInfo[nCurIdx] = ReadData(choose);
 		nCurIdx++;
 
-		
+
 		System.out.println("추가되었습니다.");
 		return true;
 	}
