@@ -90,13 +90,20 @@ public class PhoneBookManager {
 	}
 	
 	private boolean addPhoneInfo(){
+		int choose;
 		
 		if(nCurIdx >= 100)
 			return false;
 		
-		arPhoneInfo[nCurIdx] = ReadData();
+		System.out.println("1. 일반, 2. 대학, 3. 회사");
+		System.out.print("선택>>");
+		choose = scanner.nextInt();
+		scanner.nextLine(); //fflush
 		
+		arPhoneInfo[nCurIdx] = ReadData(choose);
 		nCurIdx++;
+		
+		
 		System.out.println("추가되었습니다.");
 		
 		return true;
@@ -144,11 +151,15 @@ public class PhoneBookManager {
 		System.out.println("총 데이타: " + nCurIdx);
 	}
 	
-	private PhoneInfo ReadData(){
+	private PhoneInfo ReadData(int nInput_select){
 		
-		String name;
-		String phoneNumber;
+		PhoneInfo pInfo = null;
 		
+		String		name;
+		String		phoneNumber;
+		String		major;
+		String		company;
+		int			year;
 		
 		System.out.print("Name: ");
 		name = scanner.nextLine();
@@ -156,7 +167,38 @@ public class PhoneBookManager {
 		System.out.print("phoneNumber: ");
 		phoneNumber = scanner.nextLine();
 		
-		return new PhoneInfo(name, phoneNumber);
+		switch(nInput_select){
+		
+		
+		case 1: // normal
+			pInfo = new PhoneInfo(name, phoneNumber);
+			break;
+			
+		case 2: // Univ
+			System.out.print("major: ");
+			major = scanner.nextLine();
+			
+			System.out.print("year: ");
+			year = scanner.nextInt();
+			scanner.nextLine(); //fflush
+			
+			pInfo = new PhoneUnivInfo(name, phoneNumber, major, year);
+			
+			break;
+			
+		case 3: // Company
+			System.out.print("company: ");
+			company = scanner.nextLine();
+			
+			pInfo = new PhoneCompanyInfo(name, phoneNumber, company);
+			
+			break;
+			
+		default:
+			break;
+		}
+		
+		return pInfo;
 	}
 	
 }

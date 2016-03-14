@@ -27,7 +27,6 @@ public class PhoneInfo
 
   public void showPhoneInfo(){
     System.out.println("name: "+ name);
-    System.out.println("phoneNumber: "+ phoneNumber);
-    System.out.println("");
+    System.out.println("phoneNumber: "+ phoneNumber);  
   }
 }
