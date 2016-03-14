@@ -19,6 +19,17 @@ public class PhoneInfo
 	  
 	  return name;
   }
+  
+  public String getName(){
+	  return name;
+  }
+  public String getNumber(){
+	  return phoneNumber;
+  }
+  public String getBirth(){
+	  return birthday;
+  }
+  
 
   public void showPhoneInfo(){
     System.out.println("name: "+ name);
