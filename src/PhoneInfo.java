@@ -29,4 +29,20 @@ public class PhoneInfo
     System.out.println("name: "+ name);
     System.out.println("phoneNumber: "+ phoneNumber);  
   }
+  
+  
+  
+  public int hashCode(){
+	  int code = name.length() % 3;
+	  
+	  return code;
+  }
+  
+public boolean equals(Object target){
+	  
+	  if(name.compareTo( ((PhoneInfo)target).name) == 0)
+		  return true;
+	  else
+		  return false;
+  }
 }

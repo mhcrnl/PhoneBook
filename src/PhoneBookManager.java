@@ -1,17 +1,16 @@
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class PhoneBookManager {
 	private static Scanner scanner = new Scanner(System.in);
 
-	private final int MAX_CNT = 100;
-
 	private static PhoneBookManager manager;
-	private PhoneInfo[] arPhoneInfo;
-	private int nCurIdx;
+
+	private HashSet<PhoneInfo> hsPhoneInfo; 
 
 	private PhoneBookManager(){
-		arPhoneInfo = new PhoneInfo[MAX_CNT];
-		nCurIdx = 0;
+		hsPhoneInfo = new HashSet<PhoneInfo>();
 	}
 
 	public static PhoneBookManager getInstanace(){
@@ -84,95 +83,89 @@ public class PhoneBookManager {
 		}while(nSelect != 5);
 	}
 
-	private int findPhoneInfo(){
+	private PhoneInfo findPhoneInfo(){
+		PhoneInfo toFind = null;
 		String name;
-
-		int nIdx = -1;
 
 		System.out.print("Name for find: ");
 		name = scanner.nextLine();
+		System.out.println("");
 
 		// find the name
-		for(int i=0; i<nCurIdx; i++){
-			if(name.compareTo(arPhoneInfo[i].getName()) == 0){
-				nIdx = i;
+		Iterator<PhoneInfo> itr = hsPhoneInfo.iterator();
+		while(itr.hasNext()){
+			toFind = itr.next();
+			if(toFind.getName().compareTo(name) == 0)
 				break;
-			}
+			else
+				toFind = null;
 		}
 
-		if(nIdx != -1){
-			System.out.println("[ 검색된 데이터 ]");
-			arPhoneInfo[nIdx].showPhoneInfo();
+		if(toFind != null)
+		{
+			toFind.showPhoneInfo();
+			System.out.println("");
 		}
-
-		return nIdx;
+		else
+		{
+			System.out.println("[찾고자 하는 데이터가 없습니다.");
+		}
+		
+		return toFind;
 	}
 
 	private boolean addPhoneInfo() throws MenuChoiceException{
 		int choose;
-
-		if(nCurIdx >= 100)
-			return false;
+		PhoneInfo toAdd = null;
 
 		System.out.println("1. 일반, 2. 대학, 3. 회사");
 		System.out.print("선택>>");
 		choose = scanner.nextInt();
+		
 		scanner.nextLine(); //fflush
-
-
+		System.out.println("");
+		
 		if((choose < 0) || (choose > 3))
 			throw new MenuChoiceException();
 
-
-
-		arPhoneInfo[nCurIdx] = ReadData(choose);
-		nCurIdx++;
-
-
-		System.out.println("추가되었습니다.");
+		toAdd = ReadData(choose);
+		
+		if(hsPhoneInfo.add( toAdd ))
+			System.out.println("[추가되었습니다.]");
+		else
+			System.out.println("[중복된 데이터입니다.]");
+		System.out.println("");
+		
 		return true;
 	}
 
 	private boolean removePhoneInfo(){
-		String name;
+		PhoneInfo toDelete;
 
-		if(nCurIdx <= 0)
-			return false;
-
-		// 1. input name for delete
-		System.out.print("input Name for delete: ");
-		name = scanner.nextLine();
-
-		// 2. find the name
-		for(int i=0; i<nCurIdx; i++){
-
-			// 2-1 . if found the name
-			if(arPhoneInfo[i].getName().compareTo(name) == 0)
-			{
-				// delete
-				for(int j=i; j<nCurIdx-1; j++){
-					arPhoneInfo[j] = arPhoneInfo[j+1];
-				}
-
-				nCurIdx--;
-				System.out.println("삭제되었습니다.");
-
-				return true;
-			}
+		toDelete = findPhoneInfo();
+	
+		if(toDelete != null)
+		{
+			hsPhoneInfo.remove(toDelete);
+			System.out.println("[삭제되었습니다] \n");
+			return true;
 		}
-
+		
 		return false;
 	}
 
 	public void showAllPhoneInfo(){
 
-		for(int i=0; i<nCurIdx; i++){
-
-			arPhoneInfo[i].showPhoneInfo();
-			System.out.println("");
+		PhoneInfo pInfo;
+		Iterator<PhoneInfo> itr = hsPhoneInfo.iterator();
+		
+		while(itr.hasNext())
+		{
+			pInfo = itr.next();
+			pInfo.showPhoneInfo();
 		}
-
-		System.out.println("총 데이타: " + nCurIdx);
+		System.out.println("[총 데이타: " + hsPhoneInfo.size() + "]"); //fix
+		System.out.println("");
 	}
 
 	private PhoneInfo ReadData(int nInput_select){
