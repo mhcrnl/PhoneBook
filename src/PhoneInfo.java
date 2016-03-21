@@ -33,9 +33,7 @@ public class PhoneInfo
   
   
   public int hashCode(){
-	  int code = name.length() % 3;
-	  
-	  return code;
+	  return name.hashCode();
   }
   
 public boolean equals(Object target){
