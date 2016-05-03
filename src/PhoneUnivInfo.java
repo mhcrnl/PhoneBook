@@ -1,10 +1,8 @@
 
 public class PhoneUnivInfo extends PhoneInfo{
 	
-	private String 		major; // Àü°ø
-	private int 		year; // ÇÐ³â
-	
-	
+	private String 		major; // ï¿½ï¿½ï¿½ï¿½
+	private int 		year; // ï¿½Ð³ï¿½
 	
 	public PhoneUnivInfo(String name, String phoneNumber, String major, int year){
 		super(name, phoneNumber);
